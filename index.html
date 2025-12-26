@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PhishGuard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1 class="title">PhishGuard</h1>
+    <p class="subtitle">Phishing Detection Using Machine Learning</p>
+
+    <form method="POST" id="analyzeForm">
+        <input 
+            type="text" 
+            name="url" 
+            placeholder="Enter URL to analyze"
+            value="{{ url if url else '' }}"
+            required
+        >
+        <button type="submit">Analyze URL</button>
+    </form>
+
+    <div id="loader" class="loader hidden"></div>
+
+    {% if result %}
+    <div class="result-box fade-in">
+        <h2>RESULT</h2>
+        <p><strong>Phishing:</strong> {{ result }}</p>
+        <p><strong>Type:</strong> {{ reason }}</p>
+
+        <h3>Why this result?</h3>
+        <p>{{ explanation }}</p>
+
+        <h3>Prevention Tips</h3>
+        <ul>
+            <li>Check domain spelling carefully</li>
+            <li>Do not click suspicious links</li>
+            <li>Verify HTTPS & certificates</li>
+            <li>Enable browser phishing protection</li>
+        </ul>
+    </div>
+    {% endif %}
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
